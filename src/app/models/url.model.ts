@@ -1,6 +1,6 @@
 export interface UrlModel {
   url: string;
-  expiration: Expiration;
+  expiration?: Expiration;
 }
 
 export interface Expiration {
@@ -10,6 +10,6 @@ export interface Expiration {
 
 export interface UrlApiResponse {
   url: string;
-  expires: string
+  expires?: string
 }
 
