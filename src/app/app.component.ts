@@ -19,6 +19,8 @@ export class AppComponent {
 
   addUrl() {
     if (this.urlModel) {
+      this.errorMessage = undefined;
+      this.shortenedUrl = undefined;
       this.urlService.addUrl(this.urlModel).pipe(
         catchError(err => {
           this.errorMessage = "invalid url"
@@ -32,9 +34,12 @@ export class AppComponent {
   }
 
   getType($event: string) {
-    this.urlModel.expiration ??= {unit: '', amount: 0};
-    this.urlModel.expiration.unit = $event;
-    console.log(this.urlModel.expiration?.unit)
+    if ($event === 'choose unit') {
+      this.urlModel.expiration = undefined;
+    } else {
+      this.urlModel.expiration ??= {unit: '', amount: 0};
+      this.urlModel.expiration.unit = $event;
+    }
   }
 
   getAmount($event: number) {

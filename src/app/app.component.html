@@ -1,22 +1,23 @@
-<h1 class="title">{{title}}</h1>
 
-<div>
-  <div>
-    <input [(ngModel)]="urlModel.url" placeholder="your url here"/>
 
-  </div>
+<div  class="url-container">
+  <img class="logo" src="assets/logo.png" alt="logo" />
+
+      <input  class="input" placeholder="enter your url" [(ngModel)]="urlModel.url"/>
+
   <div>specify time</div>
   <div>
-    <select [ngModel]="urlModel.expiration?.unit" (ngModelChange)="getType($event)">
-      <option [ngValue]=undefined disabled selected>choose unit</option>
+    <select class="select" [ngModel]="urlModel.expiration?.unit" (ngModelChange)="getType($event)">
+      <option selected>choose unit</option>
       <option>hours</option>
       <option>days</option>
     </select>
-    <input type="number" min="0" *ngIf="urlModel.expiration" [(ngModel)]="urlModel.expiration.amount" (ngModelChange)=
+    <input class="number" type="number" min="0" *ngIf="urlModel.expiration" [(ngModel)]="urlModel.expiration.amount"
+           (ngModelChange)=
       "getAmount($event)">
   </div>
   <div>
-    <button (click)="addUrl()">create</button>
+    <button class="button" mat-flat-button color="warn" (click)="addUrl()">create</button>
   </div>
   <div> {{errorMessage}}</div>
   <div>
