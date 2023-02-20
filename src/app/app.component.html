@@ -16,15 +16,22 @@
            (ngModelChange)=
       "getAmount($event)">
   </div>
-  <div>
+  <div class="button-container">
     <button class="button" mat-flat-button color="warn" (click)="addUrl()">create</button>
   </div>
-  <div> {{errorMessage}}</div>
-  <div>
-    <p *ngIf="shortenedUrl">{{ shortenedUrl.url }}</p>
+<!--  todo make red or more warning-->
+  <div class="error-msg"> {{errorMessage}}</div>
+  <div class="short-url-container">
+    <p class="short-url" *ngIf="shortenedUrl">
+      {{ shortenedUrl.url }}
+      <button class="button" mat-icon-button (click)="copyToClipboard(shortenedUrl.url)"><img class="img-clpb"
+                                                                                              src="/assets/clipboard.png" alt="aa">
+      </button>
+    </p>
+<!--    todo make copy toaster-->
   </div>
-  <div>
-    <p>{{shortenedUrl?.expires}}</p>
+  <div *ngIf="shortenedUrl?.expires">
+    <p>valid until {{shortenedUrl?.expires}}</p>
   </div>
 </div>
 

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {UrlService} from "./services/url.service";
 import {UrlApiResponse, UrlModel} from "./models/url.model";
 import {catchError, throwError} from "rxjs";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent {
   shortenedUrl?: UrlApiResponse;
   errorMessage?: string;
 
-  constructor(private urlService: UrlService) {
+  constructor(private urlService: UrlService, private toast: ToastrService) {
   }
 
   addUrl() {
@@ -46,4 +47,15 @@ export class AppComponent {
     this.urlModel.expiration ??= {unit: '', amount: 0};
     this.urlModel.expiration.amount = $event;
   }
+
+  copyToClipboard(text: string) {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        this.toast.info('Copied to clipboard')
+      })
+      .catch((error) => {
+        console.error('Failed to copy to clipboard:', error);
+      });
+  }
+
 }
